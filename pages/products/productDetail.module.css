@@ -1,0 +1,33 @@
+.productDetail {
+    display: flex;
+    flex-direction: column;
+}
+
+.imgListWrapper {
+    flex-basis: 100%;
+}
+
+@media screen and (min-width: 640px) {
+    .productDetail {
+        flex-direction: row;
+    }
+    .imgListWrapper {
+        flex-basis: 40%;
+    }
+    
+}
+
+.imgList {
+    display: flex;
+    align-items: center;
+    height: 400px;
+    width: 100%;
+}
+
+.imgList img {
+    max-width: 75%;
+    height: auto;
+    max-height: 75%;
+    margin: 0 auto;
+    display: block;
+  }
