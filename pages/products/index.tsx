@@ -15,12 +15,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 export default function ProductList({data}) {
   const [products, setProducts] = useState([]);
-  const [paginationParams, setPaginationParams] = useState({limit: 0, skip: 0, total: 0});
+  const [paginationParams, setPaginationParams] = useState({limit: 12, skip: 0, total: 0});
   const router = useRouter();
   const setProductState = (data) => {
-    const {products, limit, skip, total} = data;
+    const {products, skip, total} = data;
     setProducts(products);
-    setPaginationParams({limit, skip, total});
+    setPaginationParams({limit: 12, skip, total});
   };
 
   const setPagination = (action) => {
@@ -32,16 +32,22 @@ export default function ProductList({data}) {
     router.push({pathname: 'products', query: {limit, ...newParams}});
   };
 
-  const currentPage = (paginationParams.skip / paginationParams.limit) + 1;
+  const { limit, skip, total } = paginationParams;
+
+  const currentPage = (skip / limit) + 1;
   const disablePrev = currentPage === 1;
-  const disableNext = paginationParams.skip + (paginationParams.limit * 2) > paginationParams.total;
+  const disableNext = skip + limit > total;
+
+  const startCount = paginationParams.skip + 1;
+  let endCount = paginationParams.skip + paginationParams.limit;
+  endCount = endCount > paginationParams.total ? paginationParams.total : endCount;
 
   useEffect(() => setProductState(data), [data]);
   return (
     <Layout>
       <div className={styles.productListContainer}>
         <div className={styles.listInfo}>
-          <span>Viewing</span> <span>{`${paginationParams.skip + 1} - ${paginationParams.skip + paginationParams.limit}`}</span> <span>of</span> <span>{paginationParams.total}</span> <span>products</span>
+          <span>Viewing</span> <span>{`${startCount} - ${endCount}`}</span> <span>of</span> <span>{total}</span> <span>products</span>
         </div>
         <div className={styles.productList}>
           {products.map(pdt => <ProductCard product={pdt} key={pdt.id} />)}

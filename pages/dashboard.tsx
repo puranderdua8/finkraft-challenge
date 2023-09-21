@@ -3,11 +3,9 @@ import Layout from "../components/layout"
 import AccessDenied from "../components/access-denied"
 
 export default function ProtectedPage() {
-  const { data: session } = useSession()
-  console.log(session);
+  const { data: session } = useSession();
   // If no session exists, display access denied message
   if (!session) {
-    console.log('no session');
     return (
       <Layout>
         <AccessDenied />

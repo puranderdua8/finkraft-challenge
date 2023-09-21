@@ -51,13 +51,15 @@ export default function ProductDetail({ data }) {
     return (originalPrice - (originalPrice * (discount / 100))).toFixed(1);
   };
 
+  const showArrows = product.images && product.images.length > 1;
+
   return (
     <Layout>
       <div className={styles.productDetail}>
         <div className={styles.imgList}>
-          <button className={styles.imgListBtn + ' ' + styles.prevBtn} onClick={() => updateImg('prev')}>Prev</button>
+          <button style={{display: showArrows ? 'block' : 'none' }} className={styles.imgListBtn + ' ' + styles.prevBtn} onClick={() => updateImg('prev')}><i className={styles.arrow + ' ' + styles.left}></i></button>
           <img src={activeImg.url} alt={product.title} />
-          <button className={styles.imgListBtn + ' ' + styles.nextBtn} onClick={() => updateImg('next')}>Next</button>
+          <button style={{display: showArrows ? 'block' : 'none' }} className={styles.imgListBtn + ' ' + styles.nextBtn} onClick={() => updateImg('next')}><i className={styles.arrow + ' ' + styles.right}></i></button>
         </div>
         <div className={styles.infoWrapper}>
           <div className={styles.titleWrapper}>

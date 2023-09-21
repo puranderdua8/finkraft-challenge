@@ -33,6 +33,9 @@
 .imgListBtn {
     position: absolute;
     top: calc(50% - 11px);
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .prevBtn {
@@ -44,7 +47,7 @@
 }
 
 .imgList img {
-    max-width: 100%;
+    max-width: 90%;
     margin: 0 auto;
     display: block;
 }
@@ -81,4 +84,21 @@
     font-size: 12px;
     border-radius: 4px;
     align-self: start;
+  }
+  
+  .arrow {
+    border: solid black;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 4px;
+  }
+
+  .right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  
+  .left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
   }
