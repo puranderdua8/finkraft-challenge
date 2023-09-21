@@ -7,3 +7,14 @@
 .productListContainer {
   margin-top: 16px;
 }
+
+.paginationMeta {
+  margin: 16px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paginationMeta button {
+  margin: 0 16px;
+}

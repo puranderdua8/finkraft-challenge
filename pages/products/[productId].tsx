@@ -14,29 +14,27 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 export default function ProductDetail({ data }) {
   const dummyImgUrl = 'https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg?w=1480';
   const [product, setProduct] = useState({});
-  const [activeImg, setActiveImg] = useState({index: 0, url: dummyImgUrl});
+  const [activeImg, setActiveImg] = useState({ index: 0, url: dummyImgUrl });
   useEffect(() => {
     setProduct(data);
-    setActiveImg({index: 0, url: data.images[0]});
+    setActiveImg({ index: 0, url: data.images[0] });
   }, [data]);
   const updateImg = (action) => {
     const { index } = activeImg;
     const { images } = data;
     const newImg = {};
-    if(action === 'next') {
-      if(index === images.length - 1) {
-        debugger;
+    if (action === 'next') {
+      if (index === images.length - 1) {
         newImg.index = 0;
         newImg.url = images[0];
       } else {
         newImg.index = index + 1;
         newImg.url = images[index + 1];
       }
-      
+
     }
-    if(action === 'prev') {
-      if(index === 0) {
-        debugger;
+    if (action === 'prev') {
+      if (index === 0) {
         newImg.index = images.length - 1;
         newImg.url = images[images.length - 1];
       } else {
@@ -46,14 +44,32 @@ export default function ProductDetail({ data }) {
     }
     setActiveImg(newImg);
   };
+
+  const getDiscountedPrice = () => {
+    const originalPrice = product.price;
+    const discount = product.discountPercentage;
+    return (originalPrice - (originalPrice * (discount / 100))).toFixed(1);
+  };
+
   return (
     <Layout>
       <div className={styles.productDetail}>
-        <div className={styles.imgListWrapper}>
-          <div className={styles.imgList}>
-            <button onClick={() => updateImg('prev')}>Prev</button>
-            <img src={activeImg.url} alt={data.title} />
-            <button onClick={() => updateImg('next')}>Next</button>
+        <div className={styles.imgList}>
+          <button className={styles.imgListBtn + ' ' + styles.prevBtn} onClick={() => updateImg('prev')}>Prev</button>
+          <img src={activeImg.url} alt={product.title} />
+          <button className={styles.imgListBtn + ' ' + styles.nextBtn} onClick={() => updateImg('next')}>Next</button>
+        </div>
+        <div className={styles.infoWrapper}>
+          <div className={styles.titleWrapper}>
+            <h4>
+              {product.title}
+            </h4>
+            <div className={styles.categoryPill}>{product.category}</div>
+          </div>
+          <p>{product.description}</p>
+          <div className={styles.productPrice}><span className={styles.originalPrice}>&#8377;{product.price}</span> <span className={styles.discountedPrice}>&#8377;{getDiscountedPrice()}</span></div>
+          <div className={styles.productRating}>
+            &#10029; {product.rating}
           </div>
         </div>
       </div>

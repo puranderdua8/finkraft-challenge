@@ -19,6 +19,25 @@
     margin: 0;
 }
 
+.logoText::before {
+    content: 'Product Catalogue';
+    display: none;
+}
+
+.logoText::after {
+    content: 'PC';
+}
+
+@media screen and (min-width: 640px) {
+    .logoText::before {
+        display: block;
+    }
+    
+    .logoText::after {
+        display: none;
+    }   
+}
+
 .leftSection {
     display: flex;
     justify-content: center;

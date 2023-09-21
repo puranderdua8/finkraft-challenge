@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <hr />
-      Made by Purander
+      <p>Made by Purander</p>
     </footer>
   )
 }

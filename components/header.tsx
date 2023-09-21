@@ -1,19 +1,15 @@
 import Link from "next/link"
+import { useState } from 'react';
 import { signIn, signOut, useSession } from "next-auth/react"
 import styles from "./header.module.css"
 
-// The approach used in this component shows how to build a sign in and sign out
-// component that works on pages which support both client and server side
-// rendering, and avoids any flash incorrect content on initial page load.
 export default function Header() {
-  const { data: session, status } = useSession();
-  const loading = status === 'loading';
-
+  const { data: session } = useSession();
   return (
     <header className={styles.pageHeader}>
       <div className={styles.wrappedContainer}>
         <div className={styles.leftSection}>
-          <h2 className={styles.logoText}>Product Catalogue</h2>
+          <h2 className={styles.logoText}></h2>
           <nav className={styles.navWrapper}>
             <ul className={styles.navItems}>
               <li className={styles.navItem}>
