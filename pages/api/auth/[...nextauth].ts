@@ -17,6 +17,9 @@ export const authOptions = {
       },
       async authorize({username, password}) {
         try {
+          if(!username || !password) {
+            return;
+          }
           const resp = await fetch("https://dummyjson.com/auth/login", {
             method: "POST",
             headers: {
@@ -25,10 +28,14 @@ export const authOptions = {
             },
             body: JSON.stringify({ username, password }),
           });
-          const user = await resp.json();
-          return user;
+          const data = await resp.json();
+          if(data.message) {
+            throw Error('invalid creds');
+          } else {
+            return data;
+          }
         } catch (e) {
-          console.log('something went wrong. show error message');
+          return;
         }
       },
     }),
