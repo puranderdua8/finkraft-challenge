@@ -3,6 +3,7 @@
     top: 0;
     background: #fff;
     box-shadow: 0 3px 8px 2px lightgrey;
+    z-index: 1;
 }
 
 .wrappedContainer {
